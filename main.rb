@@ -94,11 +94,11 @@ end
 #====================================
 
 def import_concepts_and_features
-  db_import_csv(@db, 'UUID', '../train_id.csv')
-  db_import_csv(@db, 'Concepts', '../concepts/concepts.csv')
+  db_import_csv(@db, 'UUID', 'uuid.csv')
+  db_import_csv(@db, 'Concepts', 'concepts.csv')
   
   @features.each do |feature|
-    csv = "../../Train/train_features/ImageCLEF 2012 (training) - #{feature}.csv" 
+    csv = "features/ImageCLEF 2012 (testing) - #{feature}.csv" 
     db_import_csv(@db, feature, csv)
   end
 end
@@ -145,7 +145,7 @@ if __FILE__ == $0
 
   initial_database
 #  dimensionality_reduction
-  @concept_num.times do |i|
-    data_mining(i)
-  end
+#  @concept_num.times do |i|
+#    data_mining(i)
+#  end
 end
