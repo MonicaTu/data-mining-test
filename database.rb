@@ -13,6 +13,11 @@ def db_create_table_schema(dbFile, table, schema)
   exesql(dbFile, cmd)
 end
 
+def db_create_view_schema(dbFile, view, schema)
+  cmd = "CREATE VIEW IF NOT EXISTS #{view} (#{schema});"
+  exesql(dbFile, cmd)
+end
+
 def db_import_csv(dbFile, table, csv)
   if db_is_imported(dbFile, table)
     return
@@ -76,7 +81,7 @@ def db_is_imported(dbFile, table)
   # check whether data was already imported or not. 
   cmd = "SELECT COUNT(*) FROM #{table};"
   rs = exesql(dbFile, cmd)
-  puts rs
+  puts "#{table}: #{rs}"
   if rs != nil && rs[0][0] > 0
     return true
   end
